@@ -48,7 +48,16 @@ class ViewController: UIViewController {
     }
     
     private func requestPermission() {
-        
+        AVCaptureDevice.requestAccess(for: .video) { (granted) in
+            guard granted else {
+                fatalError("Tell user they need to enable Privacy for Video")
+            }
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                
+                self.showCamera()
+            }
+        }
     }
 	
 	private func showCamera() {
