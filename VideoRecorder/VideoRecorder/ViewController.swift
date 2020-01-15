@@ -25,6 +25,30 @@ class ViewController: UIViewController {
     
     private func requestPermissionAndShowCamera() {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
+        
+        switch status {
+            
+        case .notDetermined:
+            // First time user - they haven't seen the permission dialog
+            requestPermission()
+        case .restricted:
+            // Parental controls disabled the camera
+            fatalError("Video is disabled for the user (parental controls?)")
+            // TODO: Add UI to inform the user (talk to parents)
+        case .denied:
+            // User did not give access (possibly on accident)
+            fatalError("Tell the user they need to enable Privacy for Video")
+            // TODO: Add UI to inform user how
+        case .authorized:
+            // We asked for permission (2nd+ time they used the app)
+            showCamera()
+        @unknown default:
+            fatalError("A new status was added that we need to handle")
+        }
+    }
+    
+    private func requestPermission() {
+        
     }
 	
 	private func showCamera() {
