@@ -24,6 +24,7 @@ class CameraViewController: UIViewController {
 
     @IBAction func recordButtonPressed(_ sender: Any) {
 
+        
 	}
 	
 	/// Creates a new file URL in the documents directory

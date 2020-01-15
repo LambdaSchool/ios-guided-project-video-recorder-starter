@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 	
@@ -18,11 +19,13 @@ class ViewController: UIViewController {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		// TODO: get permission
-		
-		showCamera()
+		requestPermissionAndShowCamera()
 		
 	}
+    
+    private func requestPermissionAndShowCamera() {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+    }
 	
 	private func showCamera() {
 		performSegue(withIdentifier: "ShowCamera", sender: self)
